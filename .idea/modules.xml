@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/One-Click.iml" filepath="$PROJECT_DIR$/.idea/modules/One-Click.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/One-Click_main.iml" filepath="$PROJECT_DIR$/.idea/modules/One-Click_main.iml" group="One-Click" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/One-Click_test.iml" filepath="$PROJECT_DIR$/.idea/modules/One-Click_test.iml" group="One-Click" />
     </modules>
   </component>
 </project>
