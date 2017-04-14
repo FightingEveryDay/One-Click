@@ -8,9 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title>$Title$</title>
+    <title>Tomcat</title>
   </head>
   <body>
-  $END$
+  恭喜,启动Tomcat成功
   </body>
 </html>
