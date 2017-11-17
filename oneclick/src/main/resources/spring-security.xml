@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+    <!--    <sec:http pattern="/**/*.jpg" security="none"></sec:http>
+        <sec:http pattern="/**/*.jpeg" security="none"></sec:http>
+        <sec:http pattern="/**/*.gif" security="none"></sec:http>
+        <sec:http pattern="/**/*.png" security="none"></sec:http>s
+        <sec:http pattern="/getCode" security="none" /><!– 不过滤验证码 –>
+        <sec:http pattern="/test/**" security="none"></sec:http><!– 不过滤测试内容 –>-->
+
+    <!--设置spring－security 权限控制配置文件，项目中权限的控制统一在此配置文件中配置，包括从数据库中获取用户的相关信息，以及配置相应pattern的请求过滤规则。-->
+
+    <!--spring security 权限管理配置文件-->
+    <context:component-scan base-package="com.oneclick.common.security">
+    </context:component-scan>
+    <context:property-placeholder location="classpath:db.properties"></context:property-placeholder>
+    <!--权限控制-->
+    <sec:http auto-config="true" use-expressions="true">
+        <sec:intercept-url pattern="/superadmin/**" access="hasRole('superadmin')"/>
+        <sec:intercept-url pattern="/admin/**" access="hasRole('admin')"/>
+        <sec:intercept-url pattern="/customer/**" access="hasRole('customer')"/>
+        <!--自定义登陆页面,权限验证失败页面，登录成功页面-->
+        <sec:form-login login-page="/login.jsp" authentication-failure-url="/login.jsp" login-processing-url="/j_spring_security_check"
+                        authentication-success-handler-ref="loginSuccessHandler"/>
+        <!--用户权限不一致出现的权限不可得情况，默认情况下跳转到403页面-->
+        <sec:access-denied-handler ref="accessDeniedServletHandler" />
+        <sec:logout logout-success-url="/login.jsp" />
+    </sec:http>
+
+    <sec:authentication-manager>
+        <sec:authentication-provider>
+            <!--配置从数据库查询用户权限  and isDelete = 0 and enable = 1-->
+            <sec:jdbc-user-service data-source-ref="dataSource"
+                                   users-by-username-query="select userName,password,enable  from mms_admin where userName=? and isDelete = 0 and enable = 1"
+                                   authorities-by-username-query="select userName,role from mms_admin where username=?"
+            ></sec:jdbc-user-service>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+</beans>

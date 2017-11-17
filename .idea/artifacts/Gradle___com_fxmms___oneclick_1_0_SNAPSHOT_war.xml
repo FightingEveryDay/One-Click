@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Gradle : com.fxmms : oneclick-1.0-SNAPSHOT.war">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <properties id="gradle-properties">
+      <options external-project-path="$PROJECT_DIR$" />
+    </properties>
+    <root id="archive" name="oneclick-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Gradle : com.fxmms : oneclick-1.0-SNAPSHOT.war (exploded)" />
+      <element id="javaee-facet-resources" facet="oneclick_main/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="javaee-facet-classes" facet="oneclick_main/web/Web" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
